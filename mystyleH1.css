@@ -1,0 +1,140 @@
+
+nav
+{
+	list-style-type: none;
+	margin-bottom: 20px;
+	padding: 0;
+	background-color: #228B22;
+	width: 100%;
+	overflow:hidden;
+}
+		  
+nav a
+{
+	display: block;
+	margin: 0;
+	color: white;
+	padding: 8px 10px;
+	text-decoration:none;
+	float: left;
+	font-size: 18px;
+}
+
+nav a:hover:not(.active){
+	background-color: #006600;
+}	
+	
+#Calender {
+	border-collapse: collapse;
+	font-family: arial;
+	font-size: 16px;
+	width: 50%;
+	background-color: black;
+	margin-left:25%;
+	margin-right:25%;
+	text-align: center;
+}
+#Calender th{
+	border: 2px solid white;
+	text-align: center;
+	padding: 8px;
+	height:100px;
+}
+
+#Calender td {
+	border: 2px solid white;
+	text-align: center;
+	padding: 8px;
+	height:100px;
+	vertical-align:top;
+	text-align: center;
+}
+
+#form
+{
+	width:100%;
+}
+
+#form p
+{
+	text-align:left;
+	margin-left:400px;
+	display: block;
+	width: 80%;
+	padding: 0;
+	width: 100%;
+}
+
+#Calender tr:nth-child(even) {
+	background-color: yellow;
+}
+#Calender tr:nth-child(odd) {
+	background-color: orange;
+}		
+
+
+h2
+{
+	text-align:center;
+	font-size: 28px;
+}
+
+body {
+    background-color: lightblue;
+}
+
+.twitter-timeline
+{
+	float:right;
+}
+
+.form
+{
+	width:50%;
+	background-color:white;
+	margin-left:25%;
+	margin-right:25%;
+}
+
+.form p
+{
+	text-align:center;
+}
+
+.form form
+{
+	text-align:center;
+}
+
+
+#Calender td img
+{
+	height:50px;
+	width:70px;
+	padding:8px;
+	opacity: 0;
+}
+
+#Calender td:hover img
+{	
+	opacity: 1;
+}
+
+#instructions {
+   height: 400px;
+   float: right;
+   width: 400px;
+   overflow: auto;
+}
+
+#map{
+float:left;
+width:750px;
+height:400px;
+}
+
+.mapdiv{
+width: 1150px;
+margin-left:25%;
+
+}

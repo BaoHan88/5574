@@ -1,0 +1,238 @@
+<!DOCTYPE	html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Han Bao Calender</title>
+	  <link rel="stylesheet" type="text/css" href="mystyleH1.css" />
+	  <!--<script src = "pic.js"></script>-->
+   </head>
+   
+   <body>
+	<h2>My Calender</h2>
+	
+	<nav>
+		<a href="calender_work.html">My Calender</a> 
+		<a href="form.html">Form Input</a> 
+	</nav>
+		
+	<div class="container">	
+		<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/hashtag/UMN" data-widget-id="920168855737110528" data-width="200px">#UMN Tweets</a>
+            <script>
+			!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+				if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}
+				(document,"script","twitter-wjs");
+			</script>	
+		
+		
+		<table id="Calender" style="cursor:pointer;">
+			<tr>
+				<th>Monday</th>
+				<td><i>1:00 - 2:15 PM</i><BR>CSCI 4131 FH 101<BR>
+					<div><img src="FraserHall.jpg" alt="building"/></div>
+				</td>
+				<td><i>5:30 - 7:30 PM</i><BR>GIS 8501 BH 445
+					<div><img src="BH445.jpg" alt="building"/></div>
+				</td>
+				<td><i>9:00 - 11:00 PM</i><BR>Study at Home
+					<div><img src="Home.jpg" alt="building"/></div>
+				</td>
+			</tr>
+			 
+			<tr>
+				<th>Tuesday</th>
+				<td><i>9:45 - 11:00 AM</i><BR>CSCI 5715 KH 111
+					<div><img src="keller.jpg" alt="building"/></div>
+				</td>
+				<td><i>1:30 - 3:30 PM</i><BR>Office Hour HHH85
+					<div><img src="HHH85.jpg" alt="building"/></div>
+				</td>
+				<td><i>5:00 - 7:30 PM</i><BR>GIS 5574 BH 455
+					<div><img src="BH455.jpg" alt="building"/></div>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>Wednesday</th>
+				<td><i>1:00 - 2:15 PM</i><BR>CSCI 4131 FH 101
+					<div><img src="FraserHall.jpg" alt="building"/></div>
+				</td>
+				<td><i>4:00 - 5:00 PM</i><BR>Research BH410
+					<div><img src="BH410.jpg" alt="building"/></div>
+				</td>
+				<td><i>6:00 - 8:45 PM</i><BR>PA 5271 HHH80
+					<div><img src="hhh80.jpg" alt="building"/></div>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>Thurseday</th>
+				<td><i>9:45 - 11:00 AM</i><BR>CSCI 5715 KH 111
+					<div><img src="keller.jpg" alt="building"/></div>
+				</td>
+				<td><i>1:00 - 2:00 PM</i><BR>Group Meeting HHH173
+					<div><img src="humphrey.jpg" alt="building"/></div>
+				</td>
+				<td><i>5:00 - 7:00 PM</i><BR>Basketball GYM
+					<div><img src="reccenter.jpg" alt="building"/></div>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>Friday</th>
+				<td><i>10:00 - noon</i><BR>Study at Home
+					<div><img src="Home.jpg" alt="building"/></div>
+				</td>
+				<td><i>1:00 - 3:00 PM</i><BR>Workshop
+					<div><img src="meeting.jpg" alt="building"/></div>
+				</td>
+				<td><i>3:00 - 4:00 PM</i><BR>Weekly Research Meeting
+					<div><img src="humphrey.jpg" alt="building"/></div>
+				</td>
+			</tr>
+		</table>
+	    
+	</div>
+
+		<!--<img id="image" height="400" width="500" src="gopher.jpg"></img>--> 
+	<div class="form">
+		<p>Radius:<input id="radius" type="text" name="radius" size="10" value=""> <button onclick="getRestaurants()">Find Nearby Resturant</button><br></p>
+		<p>Destination:<input id="destination" type="text" name="destination" size="20" value=""> <button onclick="getDirection()">Get directions</button><br></p> 
+		   <form>Walking<input id="walking" type="radio" name="mode" value="walking"> Driving<input id="driving" type="radio" name="mode"> Transit<input id="transit" type="radio" name="mode"> Bicycling<input id="bicycling" type="radio" name="mode"></form>
+	</div>
+	
+	<div class ="mapdiv">
+		<div id="map"></div>		
+		<div id="instructions"></div>
+	<!--</div>-->
+	<script>
+      var map;
+	  var service;
+	  var directionsService;
+	  var directionsDisplay;
+	  
+	  function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: {lat: 44.977276, lng: -93.232266}
+        });
+        var geocoder = new google.maps.Geocoder();
+		service = new google.maps.places.PlacesService(map);
+		
+		//direction services
+		directionsService = new google.maps.DirectionsService;
+        directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsDisplay.setMap(map);
+		directionsDisplay.setPanel(document.getElementById('instructions'));
+		
+		var info_txt = ["CSCI 5715 KH 111, Keller Hall","CSCI 4131 FH 101, Fraser Hall","Research BH410,Blegen Hall","PA 5271 HHH80, Humphrey"];
+		var address = ["Keller hall,umn, 55455","Fraser hall,umn,55455","Blegen hall,umn, 55455",",Anderson Hall,umn, 55455"]
+        for (var i=0; i<address.length; i++){
+			geocoder.geocode({'address': address[i]}, function(results, status) {
+			  if (status === 'OK') {
+				var id = -1;
+				if(results[0].formatted_address.includes("Keller")) id = 0;
+				if(results[0].formatted_address.includes("Fraser")) id = 1;
+				if(results[0].formatted_address.includes("Blegen")) id = 2;
+				if(results[0].formatted_address.includes("Anderson")) id = 3;
+				
+				var marker = new google.maps.Marker({
+				  map: map,
+				  position: results[0].geometry.location,
+				  title: results[0].formatted_address
+				});
+				var infowindow = new google.maps.InfoWindow({
+					content: info_txt[id]
+				});
+				google.maps.event.addListener(marker, 'click', createWindow(map,infowindow, marker));
+				
+				
+				
+			  } else {
+				alert('Geocode was not successful for the following reason: ' + status);
+			  }
+			});
+		}
+        
+      }
+	  
+	  function createWindow(rmap, rinfowindow, rmarker){
+              return function(){
+				rinfowindow.open(rmap, rmarker);
+            }
+	  }//end create (info) window
+
+      
+	  function getRestaurants(){
+	    var r = document.getElementById("radius").value;
+		var request = {
+			location: new google.maps.LatLng(44.977276, -93.232266),
+			radius: r,
+			type: ['restaurant']
+		  };
+
+		<!--var service = new google.maps.places.PlacesService(map);-->
+		service.nearbySearch(request, callback);
+
+		function callback(results, status) {
+		  if (status == google.maps.places.PlacesServiceStatus.OK) {
+			for (var i = 0; i < results.length; i++) {
+			  var place = results[i];
+			  console.log(place);
+			  
+			  var marker = new google.maps.Marker({
+				  map: map,
+				  position: place.geometry.location,
+				  title: place.vicinity
+				});
+			  var infowindow = new google.maps.InfoWindow({
+				content: place.name + "," + place.vicinity
+				
+			  });
+			  google.maps.event.addListener(marker, 'click', createWindow(map,infowindow, marker));
+				
+			}
+		  }
+		}
+	  }
+	  
+	  function getDirection(){
+	    //current location during coding is keller hall
+		//for user current location, can use the geolocation API
+	    currentLocation = "Keller Hall, UMN";
+		
+		var mode="WALKING";
+		if(document.getElementById("driving").checked==true)mode = "DRIVING";
+		if(document.getElementById("walking").checked==true)mode = "WALKING";
+		if(document.getElementById("transit").checked==true)mode = "TRANSIT";
+		if(document.getElementById("bicycling").checked==true)mode = "BICYCLING";
+		
+		directionsService.route({
+          origin: currentLocation,
+          destination: document.getElementById('destination').value,
+          travelMode: mode
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+	  
+	  }
+	  
+	  
+	  
+	  window.onload = function() {
+		
+	  }
+	  
+	  
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO8eH9gBxTxnjYrwTx073YR_2vWa6G2_I&callback=initMap&libraries=places">
+    </script>
+	</div>
+	<p>Cited from: <cite>https://developers.google.com/maps/documentation/geocoding/start <br> https://developers.google.com/maps/documentation/javascript/directions <br> https://developers.google.com/maps/documentation/javascript/places</cite><p>
+   </body>
+   
+</html>
